@@ -7,7 +7,7 @@ $ description = getPlainText(string_slice(article.body, 300), collapse_whitespac
 
 $add_metatag("description", description)
 $add_metatag("og:title", article.title)
-$add_metatag("og:description", article.description)
+$add_metatag("og:description", description)
 $add_metatag("og:url", "http://kottapalli.in" + article.key)
 $add_metatag("fb:admins", "133417963401650")
 
