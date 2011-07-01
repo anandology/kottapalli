@@ -14,7 +14,10 @@ USAGE:
 import sys
 import _init_path
 
+import web
 import infogami
+
+web.config.debug = False
 
 def main(args):
     if len(args) < 1 or sys.argv[0] in ['-h', '--help']:

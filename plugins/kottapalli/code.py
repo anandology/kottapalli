@@ -40,10 +40,10 @@ def string_slice(text, letters):
     return head + tail[0]
 
 @public
-def get_objects(type=None):
+def get_objects(type=None, limit=20):
     site = web.ctx.site
     if type:
-        return [site.get(key) for key in site.things({"type":type, 'sort': '-created'})]
+        return [site.get(key) for key in site.things({"type":type, 'sort': '-created', "limit": limit})]
     return [site.get(key) for key in site.things({})]
 
 @public
@@ -52,8 +52,8 @@ def get_categories():
     return [(c.key, c.name) for c in cats]
 
 @public
-def get_issues(published=True):
-    obj = get_objects('/type/issue')
+def get_issues(published=True, limit=1000):
+    obj = get_objects('/type/issue', limit=limit)
     if published:
         return [o for o in obj if o.published]
     return [o for o in obj if not o.published]
@@ -418,7 +418,7 @@ def list_pages(path, limit=100, offset=0, sort=None):
 
 class archives(delegate.page):
     def GET(self):
-        issues = get_issues()
+        issues = get_issues(limit=1000)
         return render.archives(issues)
 
 class sitemap(delegate.page):
