@@ -3,7 +3,7 @@ $def with (article)
 $var title: $article.title
 $var print: /2009/06/print?article=$article.key
 
-$var description: $:getPlainText(string_slice(article.body, 100)) ...
+$var description: $getPlainText(string_slice(article.body, 300), collapse_whitespace=True) ...
 
 $if article.intro:
     <div class = "intro">$:format(article.intro)</div>

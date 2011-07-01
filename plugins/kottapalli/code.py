@@ -27,10 +27,13 @@ client.register_thing_class('/type/article', Article)
 client.register_thing_class('/type/issue', Issue)
 
 @public
-def getPlainText(text):
+def getPlainText(text, collapse_whitespace=False):
     """It takes a text(Body of page, it might have macros) and remove macros and html tags, returns new text.
     """
-    return re.sub('<.[^>]*>', '', re.sub('{{.[^}]*}}', '', text))
+    text = re.sub('<.[^>]*>', '', re.sub('{{.[^}]*}}', '', text))
+    if collapse_whitespace:
+        text = re.sub('[\n\t ]+', ' ', text)
+    return text
 
 @public
 def string_slice(text, letters):
