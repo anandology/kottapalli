@@ -10,6 +10,9 @@ $def with (page)
 <meta name="verify-v1" content="kDwD0f2P1DxMRwCgqDNLtoHr8CAVjf0RwN6xPgwYv2w=" />
 <meta name="robots" content="$ctx.get('index', 'index'),$ctx.get('follow','follow')"/>
 
+$if "description" in page:
+    <meta name="description" content="$page.description"/>
+
 <title>$page.title (కొత్తపల్లి)</title>
 <script type="text/javascript" src="/static/js/jquery/jquery.js"></script>
 
