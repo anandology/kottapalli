@@ -27,6 +27,15 @@ client.register_thing_class('/type/article', Article)
 client.register_thing_class('/type/issue', Issue)
 
 @public
+def get_metatags():
+    return web.ctx.setdefault("metatags", web.storage())
+
+@public
+def add_metatag(name, value):
+    meta = get_metatags()
+    meta[name] = value
+
+@public
 def getPlainText(text, collapse_whitespace=False):
     """It takes a text(Body of page, it might have macros) and remove macros and html tags, returns new text.
     """

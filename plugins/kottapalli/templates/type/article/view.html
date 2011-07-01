@@ -3,7 +3,19 @@ $def with (article)
 $var title: $article.title
 $var print: /2009/06/print?article=$article.key
 
-$var description: $getPlainText(string_slice(article.body, 300), collapse_whitespace=True) ...
+$ description = getPlainText(string_slice(article.body, 300), collapse_whitespace=True) + "..."
+
+$add_metatag("description", description)
+$add_metatag("og:title", article.title)
+$add_metatag("og:description", article.description)
+$add_metatag("og:url", "http://kottapalli.in" + article.key)
+$add_metatag("fb:admins", "133417963401650")
+
+<iframe src="http://www.facebook.com/plugins/like.php?app_id=183507481705953&href=http://kottapalli.in$article.key&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21"
+        scrolling="no" 
+        frameborder="0" 
+        style="border:none; overflow:hidden; width:90px; height:21px;" 
+        allowTransparency="true"></iframe>
 
 $if article.intro:
     <div class = "intro">$:format(article.intro)</div>
