@@ -401,7 +401,6 @@ class feed(delegate.page):
 class commentsfeed(delegate.page):
     path = "/comments/feed"
     def GET(self):
-        mail_ids()
         type = web.input().get('type', '')
         comments = get_objects('/type/comment')[:10]
         if type == 'atom':
