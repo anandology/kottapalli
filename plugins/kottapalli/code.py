@@ -184,7 +184,9 @@ class addComment(delegate.page):
         # prevent most common spam
         if 'url' in  i['comment'] and 'link' in i['comment'] and 'http://' in i['comment']:
             return web.seeother(i['article.key'])
-           
+        if '<a href' in  i['comment'] and 'http://' in i['comment']:
+            return web.seeother(i['article.key'])
+          
         query = {
             'key': path,
             'type': {'key': "/type/comment"},
