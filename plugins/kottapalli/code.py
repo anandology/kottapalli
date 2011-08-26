@@ -24,12 +24,13 @@ class Issue(client.Thing):
     @property
     def banner_url(self):
         _, yyyy, mm = self.key.split("/")
-        prefix = os.path.join("static", yyyy, mm, "banner")
-        jpg = prefix + ".jpg"
-        if os.path.exists(prefix + ".jpg"):
-            return "/" + prefix + ".jpg"
-        else:
-            return "/" + prefix + ".gif"
+        prefix = os.path.join("static", "images", yyyy, mm, "banner")
+        extensions = [".jpg", ".JPG", ".gif", ".GIF", ".png", ".PNG"]
+        for ext in extensions:
+            if os.path.exists(prefix + ext):
+                return "/" + prefix + ext
+                
+        return "/" + prefix + ".gif"
 
 client.register_thing_class('/type/article', Article)
 client.register_thing_class('/type/issue', Issue)
