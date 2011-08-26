@@ -6,7 +6,6 @@ $if not issue:
     $ issue = (issues and issues[0]) or None
 
 $if issue:
-    $ ym = issue.key.strip('/').split('/')
-    <div id="banner"><img class="logo" src="/static/images/${ym[0]}/${ym[1]}/banner.gif" width="900" alt="logo" title="logo" /></div>
+    <div id="banner"><img class="logo" src="$issue.banner_url" width="900" alt="logo" title="logo" /></div>
 $else:
     <div id="banner"><img class="logo" src="/static/images/banner.gif" width="900" alt="logo" title="logo" /></div>

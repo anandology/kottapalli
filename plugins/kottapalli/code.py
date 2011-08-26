@@ -21,7 +21,15 @@ class Article(client.Thing):
         return web.ctx.site.get(parent)
     
 class Issue(client.Thing):
-    pass
+    @property
+    def banner_url(self):
+        _, yyyy, mm = self.key.split("/")
+        prefix = os.path.join("static", yyyy, mm, "banner")
+        jpg = prefix + ".jpg"
+        if os.path.exists(prefix + ".jpg"):
+            return "/" + prefix + ".jpg"
+        else:
+            return "/" + prefix + ".gif"
 
 client.register_thing_class('/type/article', Article)
 client.register_thing_class('/type/issue', Issue)
