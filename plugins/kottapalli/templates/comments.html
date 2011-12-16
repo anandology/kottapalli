@@ -1,0 +1,79 @@
+$def with (comments)
+
+$var title: Comments
+
+<style type="text/css">
+#sidebar { display: none; }
+#sidebar-b { display: none; }
+#content { margin: 0px;}
+
+table.altrowstable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+}
+table.altrowstable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.altrowstable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+tr.odd {
+	background-color:#d4e3e5;
+}
+tr.even {
+	background-color:#c3dde0;
+}
+
+td {
+    overflow: hidden;
+}
+
+td.checkbox { max-width: 40px; }
+td.article { max-width: 150px; }
+td.author { max-width: 200px; }
+td.comment { max-width: 400px; }
+td.date { max-width: 100px; }
+</style>
+
+<form method="POST">
+<table class="altrowtable">
+	<tr>
+		<th></th>
+		<th>Issue/Article</th>
+		<th>Author</th>
+		<th>Comment</th>
+		<th>When</th>
+	</tr>
+	$for i, c in enumerate(comments):
+        $if i % 2 == 0:
+            $ klass = "even"
+        $else: 
+            $ klass = "odd"
+        <tr class="$klass">
+            <td class="checkbox"><input type="checkbox" name="key" value="$c.key"/></td>
+            <td class="article">
+                $if c.article:
+                    $c.article.issue<br/>
+                    $c.article.title
+                $else:
+                    -
+            </td>
+            <td class="author">$c.author ($c.email)<br/>$c.website</td>
+            <td class="comment">$c.comment</td>
+            <td class="date">$datestr(c.created)</td>
+        </tr>
+</table>
+
+	<div>
+		<input type="submit" name="delte" value="Delete Selected"/>
+</form>

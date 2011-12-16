@@ -284,6 +284,21 @@ class articles_list(delegate.page):
             return render.show_articles(issue, articles)
         else:
             return ""
+            
+class comments_list(delegate.page):
+    path = "/dashboard/comments"
+    
+    @require_login
+    def GET(self):
+        comments = web.ctx.site.get_many(web.ctx.site.things({"type": "/type/comment", "sort": "-created", "limit": 100}))
+        return render.comments(comments)
+
+    @require_login
+    def POST(self):
+        i = web.input(key=[])
+        docs = [dict(key=key, type={"key": "/type/delete"}) for key in i['key']]
+        web.ctx.site.save_many(docs, comment="deleted comments")
+        raise web.seeother("/dashboard/comments")
 
 class images_list(delegate.page):
     path = '/dashboard(/\d{4}/\d{2})/images'
