@@ -187,6 +187,8 @@ class addComment(delegate.page):
             return web.seeother(i['article.key'])
         if '<a href' in  i['comment'] and 'http://' in i['comment']:
             return web.seeother(i['article.key'])
+        if i['website'] in ['http://www.yahoo.com/', 'http://www.google.com/', 'http://www.bing.com/', "http://www.facebook.com/"]:
+            return web.seeother(i['article.key'])            
           
         query = {
             'key': path,
