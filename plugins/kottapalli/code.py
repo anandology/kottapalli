@@ -8,6 +8,7 @@ from infogami.infobase import client
 from infogami import config
 from telugu_months import months as te_months
 import datetime
+import utils
 
 import re
 import os
@@ -474,3 +475,14 @@ class sitemap(delegate.page):
         
         out = render.sitemap(articles)
         raise web.ok(out)
+
+@delegate.public
+def get_notice():
+    """Take all the blog posts with tag notice and show it in the main website.
+    """
+    posts = utils.get_blog_feeds()
+    notices = [post for post in posts if 'notice' in post.get('categories', [])]
+    if notices:
+        return notices[0]
+    else:
+        return None
