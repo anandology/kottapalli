@@ -28,7 +28,7 @@ def _get_blog_feeds():
     
     def parse_item(item):
         pubdate = datetime.datetime.strptime(item.find("pubDate").text, '%a, %d %b %Y %H:%M:%S +0000')
-        return dict(
+        return web.storage(
             title=item.find("title").text,
             url=item.find("link").text,
             pubdate=pubdate,

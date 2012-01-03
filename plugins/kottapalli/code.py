@@ -474,7 +474,7 @@ class sitemap(delegate.page):
         out = render.sitemap(articles)
         raise web.ok(out)
 
-@delegate.public
+@public
 def get_notice():
     """Take all the blog posts with tag notice and show it in the main website.
     """
