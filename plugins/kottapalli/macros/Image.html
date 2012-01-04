@@ -10,23 +10,32 @@ $if float == "right":
     $ width = "250px"
     $if is_print:
         $ width = "500px"
+    $ imgwidth = 250
+    $ imgheight = 500
 $elif float == "left":
     $ margin = "margin-right: 10px"
     $ width = "250px"
+    $ imgwidth = 250
+    $ imgheight = 500
 $elif float == "thumb":
     $ margin = "margin: -2em 0pt"
     $ width = "40px"
     $ float = "right"
     $if is_print:
         $ width = "100px"
+    $ imgwidth = 40
+    $ imgheight = 40        
 $else:
     $ margin = "margin: 10px 0px 10px 0px"
     $ width = "100%"
+    $ imgwidth = 570
+    $ imgheight = 570
 
 $ issue = get_current_issue()
 
 $if issue:
     $ path = "/static/images" + issue.key + "/" + name
+    $ path = get_image_url(issue.key, name, imgwidth, imgheight)
 $else:
     $ path = "/static/images/common/" + name
 

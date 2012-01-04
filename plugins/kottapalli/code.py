@@ -12,6 +12,7 @@ import utils
 
 import re
 import os
+import Image
 
 types.register_type('^/[0-9][0-9][0-9][0-9]/[0-9][0-9]$',  '/type/issue')
 types.register_type('^/[0-9][0-9][0-9][0-9]/[0-9][0-9]/.*$',  '/type/article')
@@ -29,9 +30,9 @@ class Issue(client.Thing):
         extensions = [".jpg", ".JPG", ".gif", ".GIF", ".png", ".PNG"]
         for ext in extensions:
             if os.path.exists(prefix + ext):
-                return "/" + prefix + ext
-                
-        return "/" + prefix + ".gif"
+                return get_image_url(self.key, "banner" + ext, 900, 900)
+
+        return get_image_url(self.key, "banner" + ".gif", 900, 900)
 
 client.register_thing_class('/type/article', Article)
 client.register_thing_class('/type/issue', Issue)
@@ -165,7 +166,7 @@ def next_issue_my(recentIssue):
 def get_files(path):
     path = os.path.join("static/", path.lstrip('/'))
     try:
-        return os.listdir(path)
+        return [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
     except OSError:
         return []
 
@@ -487,10 +488,55 @@ def get_notice():
     else:
         return None
         
+def get_latest_issue():
+    issues = get_issues(limit=10)
+    if issues:
+        return issues[0]
+        
 class latest_issue(delegate.page):
     def GET(self):
-        issues = get_issues(limit=1)
-        if issues:
-            raise web.seeother(issues[0].key)
+        issue = get_latest_issue()
+        if issue:
+            raise web.seeother(issue.key + '/welcome')
         else:
             raise web.seeother("/")
+    
+def mkdir_p(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+          
+@public  
+def get_image_url(issue_key, img_filename, width, height):
+    root = "static/images" + issue_key
+    img_path = root + "/" + img_filename
+    thumbnail_path = "%s/thumbnails/%s_%s_%s" % (root, width, height, img_filename)
+    thumbnail_path = os.path.splitext(thumbnail_path)[0] + ".jpg"
+    
+    if not os.path.exists(img_path):
+        print >> web.debug, "image not found", img_path
+        return None
+    
+    if not os.path.exists(thumbnail_path):
+        print >> web.debug, "generating thumbnail", thumbnail_path
+        mkdir_p(os.path.join(root, "thumbnails"))
+        cmd = "convert -resize %sx%s %s %s" % (width, height, img_path, thumbnail_path)
+        print >> web.debug, cmd
+        os.system(cmd)
+        """
+        mkdir_p(os.path.join(root, "thumbnails"))
+        img = Image.open(img_path)
+        img.thumbnail((width, height), resample=Image.ANTIALIAS)
+        img.save(thumbnail_path, "JPEG", quality=95)
+        """
+    if os.path.exists(thumbnail_path):
+        mtime = int(os.stat(thumbnail_path).st_mtime)
+        return "/" + thumbnail_path + "?t=%d" % mtime 
+            
+class latest_cover(delegate.page):
+    def GET(self):
+        issue = get_latest_issue()
+        if issue:
+            url = get_image_url(issue.key, "cover.jpg", 100, 150)
+            if url:
+                raise web.seeother(url)
+        raise web.notfound()

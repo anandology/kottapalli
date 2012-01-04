@@ -17,7 +17,7 @@ Images
     $for i in range(len(images)):
         $if ((i % nimgs) == 0) and (i != 0):
             </tr><tr>
-        <td><a class="small" href="/static/${path}/${images[i]}" target="_blank"><img width="50" height="50" border="0" style="border: 1px solid rgb(204, 204, 204);" alt="${images[i]}" src="/static/${path}/${images[i]}"/></a>
+        <td><a class="small" href="/static/${path}/${images[i]}" target="_blank"><img width="50" height="50" border="0" style="border: 1px solid rgb(204, 204, 204);" src="$get_image_url(issue.key, images[i], 50, 50)" alt="${images[i]}" /></a>
         <br/>
         <a class="small" href="/static/${path}/${images[i]}" target="_blank">${images[i]}</a></td>
 
