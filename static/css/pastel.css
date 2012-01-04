@@ -49,8 +49,12 @@ color : #444444;
 font-size: 14px;
 }
 #content h1 {
+/*
 margin : 30px 0 10px 0;
-font : normal 18px/30px verdana, arial, tahoma, sans-serif;
+*/
+margin-top: 0px;
+margin-bottom: 10px;
+font : normal 24px/30px verdana, arial, tahoma, sans-serif;
 color : #369;
 background : inherit;
 }

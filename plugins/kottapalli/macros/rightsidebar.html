@@ -6,11 +6,12 @@ $ issues = get_issues(published=True)
 
  <div class="menu">
   <ul>
-  <li><a href="/మా గురించి">మా గురించి</a></li>
   <li><a href="mailto:team@kottapalli.in">సంప్రదించండి</a></li>
-  <li><iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2F%E0%B0%95%E0%B1%8A%E0%B0%A4%E0%B1%8D%E0%B0%A4%E0%B0%AA%E0%B0%B2%E0%B1%8D%E0%B0%B2%E0%B0%BF%2F133417963401650&amp;width=166&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:166px; height:62px;" allowTransparency="true"></iframe></li>
+  <li><a href="/help/fonts">Font Help</a></li> 
   </ul>
+  </div>      
 
+  <div class="menu">
   <b>సంచికలు</b><br/>
   <ul id="issues">
   $for i in issues[:10]:
@@ -61,6 +62,3 @@ $if not ctx.user:
 </div>
 </div>
 </div>
-
-<a href="http://www4.clustrmaps.com/counter/maps.php?url=http://kottapalli.in" id="clustrMapsLink"><img style="width: 140px; " src="http://www4.clustrmaps.com/counter/index2.php?url=http://kottapalli.in" style="border:0px;" alt="Locations of visitors to this page" title="Locations of visitors to this page" id="clustrMapsImg" onerror="this.onerror=null; this.src='http://www2.clustrmaps.com/images/clustrmaps-back-soon.jpg'; document.getElementById('clustrMapsLink').href='http://www2.clustrmaps.com';" />
-</a>

@@ -1,11 +1,22 @@
 $def with ()
+<style type="text/css">
+#header-nav a {
+	font-size: 1.6em;
+	color: white;
+	text-decoration: none;
+	padding: 0px 10px;
+}
 
-<div>
-<!--
-    <div style="float: left; text-align: left; font-size: 12px">నిర్వహణ: <a  style="color: #5982AA;" href="http://timbaktu.org">టింబక్టు కలెక్టివ్</a>, చెన్నేకొత్తపల్లి</div>
--->
+#header-nav a:hover {
+	text-decoration: underline;
+	background-color: inherit;
+}
+</style>
 
+<div style="padding: 5px 10px;">
     <div style="float: right; text-align: right; height: 100%">$:macros.searchBox()</div>
-
-          <div style="margin:0 auto;width:300px; text-align: center; font-size: 14px;">సుస్వాగతం</div>
+	<div id="header-nav">
+		<a href="/">మొదటి పేజీ</a>
+		<a href="/మా గురించి">మా గురించి</a>
+	</div>
 </div>

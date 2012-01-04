@@ -1,36 +1,31 @@
 $def with ()
 
-$ issue = get_current_issue()
+$ current = get_current_issue()
+
+$ issue = current or get_latest_issue()
 
 $if issue:
-	$ cover_url = get_image_url(issue.key, "cover.jpg", 140, 200)
-	$if cover_url:
-		<style type="text/css">
-		#sidebar {
-			margin-top: 0px;
-			padding-top: 0px;
-		}
-		#cover-thumb {
-			padding-bottom: 10px;
-		}
-		</style>
-		<div id="cover-thumb">
-			<a href="$issue.key"><img src="$cover_url" alt="$issue.name అట్ట"/></a>
-		</div>
-
-	<div class="menu">
-	<ul>
-	    <li><a href="/">మొదటి పేజీ</a></li> 
-	    <li><a href="/help/fonts">Font Help</a></li> 
-	</ul>
-	</div>
-		
-    $ categories = categorize_articles(issue.articles)
-    $for cat, articles in categories.items():
-        <h1>$cat</h1>
-        <div class="menu">
-        <ul>
-        $for a in articles:
-            <li><a href="$a.key">$a.title</a></li>
-        </ul>
+    $ cover_url = get_image_url(issue.key, "cover.jpg", 140, 200)
+    $if cover_url:
+        <style type="text/css">
+        #sidebar {
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+        #cover-thumb {
+            padding-bottom: 10px;
+        }
+        </style>
+        <div id="cover-thumb">
+            <a href="$issue.key" title="$issue.name సంచిక"><img src="$cover_url" alt="$issue.name సంచిక"/></a>
         </div>
+	$if current:
+	    $ categories = categorize_articles(issue.articles)
+	    $for cat, articles in categories.items():
+	        <h1>$cat</h1>
+	        <div class="menu">
+	        <ul>
+	        $for a in articles:
+	            <li><a href="$a.key">$a.title</a></li>
+	        </ul>
+	        </div>

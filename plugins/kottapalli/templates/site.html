@@ -73,14 +73,15 @@ body{behavior:url(csshover.htc); font-size:75%;}
 
 <div id="container">
     $:macros.banner()    
+	
+	$:macros.Notice()
+	
     <!-- Begin CSS Horizontal Popout Menu -->
     <div id="menuh-container">
-
-    <div id="menuh" style="padding-top: 5px; padding-bottom: 5px;">
-        $:macros.headermenu()
-    </div>
-    </div>
-
+        <div id="menuh" style="padding-top: 5px; padding-bottom: 5px; background: #5D775A;">
+            $:macros.headermenu()
+        </div>
+	</div>
     <!-- End CSS Horizontal Popout Menu -->
 
 <div id="sidebar">
@@ -92,7 +93,6 @@ body{behavior:url(csshover.htc); font-size:75%;}
 </div>
 
 <div id="content">
-    $:macros.Notice()
     <script>
         function change_font_size(size) {
             \$("#content").css("font-size", size);
@@ -108,9 +108,6 @@ body{behavior:url(csshover.htc); font-size:75%;}
         <a style="font-size: 20px" href="#" onclick="return change_font_size('20px');">అ</a>
         <a style="font-size: 22px" href="#" onclick="return change_font_size('22px');">అ</a>
     </div>
-    <br/>
-    <br/>
-
 
 $if ctx.error:
     <p class="error"><pre>$ctx.error</pre></p>

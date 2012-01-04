@@ -488,6 +488,7 @@ def get_notice():
     else:
         return None
         
+@public
 def get_latest_issue():
     issues = get_issues(limit=10)
     if issues:
