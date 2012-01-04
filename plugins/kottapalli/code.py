@@ -500,6 +500,17 @@ class latest_issue(delegate.page):
             raise web.seeother(issue.key + '/welcome')
         else:
             raise web.seeother("/")
+
+class latest_cover(delegate.page):
+    path = "/latest_issue/cover.jpg"
+    
+    def GET(self):
+        issue = get_latest_issue()
+        if issue:
+            url = get_image_url(issue.key, "cover.jpg", 100, 150)
+            if url:
+                raise web.seeother(url)
+        raise web.notfound()
     
 def mkdir_p(path):
     if not os.path.exists(path):
@@ -530,13 +541,5 @@ def get_image_url(issue_key, img_filename, width, height):
         """
     if os.path.exists(thumbnail_path):
         mtime = int(os.stat(thumbnail_path).st_mtime)
-        return "/" + thumbnail_path + "?t=%d" % mtime 
-            
-class latest_cover(delegate.page):
-    def GET(self):
-        issue = get_latest_issue()
-        if issue:
-            url = get_image_url(issue.key, "cover.jpg", 100, 150)
-            if url:
-                raise web.seeother(url)
-        raise web.notfound()
+        return "/" + thumbnail_path + "?t=%d" % mtime
+        
