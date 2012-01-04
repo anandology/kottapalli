@@ -486,3 +486,11 @@ def get_notice():
         return notices[0]
     else:
         return None
+        
+class latest_issue(delegate.page):
+    def GET(self):
+        issues = get_issues(limit=1)
+        if issues:
+            raise web.seeother(issues[0].key)
+        else:
+            raise web.seeother("/")
