@@ -14,30 +14,44 @@ $add_metatag("fb:admins", "133417963401650")
 $if article.intro:
     <div class = "intro">$:format(article.intro)</div>
 
+<div class="article-body">
 <p>
 $:format(article.body)
 </p>
+</div>
 
 $ comments = sortComments(article.comments)
+$if comments:
+    <h2 id="comments" style="clear: right;">$:len(comments) వ్యాఖ్యలు 
+    </h2><hr/>
+    <ol>
+    $for c in comments:
+	<li>
+	    <p>$:format(c.comment)</p>  
+	    <p><cite>వ్రాసిన వారు: 
+	    $if c.website:
+		<a href="$c.website">$c.author</a> 
+	    $else:
+		$c.author     
+	    &#8212; $datestr(c.last_modified)</cite> </p>
+	</li>
+    </ol>
+    <br/>
 
-<h2 id="comments" style="clear: right;">$:len(comments) వ్యాఖ్యలు 
-</h2><hr/>
 
-<ol>
-$for c in comments:
-    <li>
-        <p>$:format(c.comment)</p>  
-        <p><cite>వ్రాసిన వారు: 
-        $if c.website:
-            <a href="$c.website">$c.author</a> 
-        $else:
-            $c.author     
-        &#8212; $datestr(c.last_modified)</cite> </p>
-    </li>
-</ol>
-<br/>
+$#:macros.commentBox(article)
 
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kottapalli'; // required: replace example with your forum shortname
 
-<!--
-$:macros.commentBox(article)
--->
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
