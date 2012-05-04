@@ -176,9 +176,8 @@ def get_issue_comments(issue):
         comments.extend(article.comments)
     return sortComments(comments)
 
-
 class addComment(delegate.page):
-    def POST(self):
+    def __disabled_POST(self):
         i = web.input(_method='post')
         i['type.key'] = '/type/comment'
         i['_comment'] = ''
