@@ -40,6 +40,7 @@ color : #666;
 background : #d9e1e5; /* url(img/blue_banner2.jpg) no-repeat top center; */
 }
 #content {
+overflow: hidden;
 padding : 10px;
 margin-left : 155px;
 margin-right : 155px;
@@ -149,6 +150,7 @@ font : bold 10px/12px verdana, arial, tahoma, sans-serif;
 color : #5d775a;
 background : inherit;
 }
+/*
 h3 {
 margin-top : 160px;
 font : bold 200% "Trebuchet MS", verdana, arial, tahoma, sans-serif;
@@ -156,6 +158,7 @@ letter-spacing : 5px;
 color : #6972a9;
 background : transparent;
 }
+*/
 a {
 color : #5d775a;
 font-size: 12px;
@@ -219,3 +222,4 @@ pre {
  white-space: -o-pre-wrap;    /* Opera 7 */
  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
