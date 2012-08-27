@@ -81,14 +81,15 @@ body{behavior:url(csshover.htc); font-size:75%;}
         <div id="menuh" style="padding-top: 5px; padding-bottom: 5px; background: #5D775A;">
             $:macros.headermenu()
         </div>
-	</div>
+    </div>
     <!-- End CSS Horizontal Popout Menu -->
 
-<div id="sidebar">
+
+<div id="sidebar" style="">
     $:macros.leftsidebar()
 </div>
 
-<div id="sidebar-b">
+<div id="sidebar-b" style="">
     $:macros.rightsidebar()
 </div>
 
@@ -109,22 +110,26 @@ body{behavior:url(csshover.htc); font-size:75%;}
         <a style="font-size: 22px" href="#" onclick="return change_font_size('22px');">అ</a>
     </div>
 
-$if ctx.error:
-    <p class="error"><pre>$ctx.error</pre></p>
+    $if ctx.error:
+	<p class="error"><pre>$ctx.error</pre></p>
 
-$if ctx.user:
-    <form name='logout' action="$homepath()/account/logout" method='POST'></form>
-    <div id="login" style="float: right">
-        స్వాగతం $ctx.user.displayname 
-        | <a href="#" onclick="document.forms['logout'].submit()">Logout</a>
-    </div> 
+    $if ctx.user:
+	<form name='logout' action="$homepath()/account/logout" method='POST'></form>
+	<div id="login" style="float: right">
+	    స్వాగతం $ctx.user.displayname 
+	    | <a href="#" onclick="document.forms['logout'].submit()">Logout</a>
+	</div> 
 
 
-<h1>$page.title</h1>
+    <h1>$page.title</h1>
 
-$:page
-<br style="clear: both"/>
+    $:page
+
+    <br style="clear: both"/>
 </div>
+
+
+
 <div style="clear:both"> </div>
 <div id="footer"><a href="/contact">Contact Us</a> | Design by <a href="http://www.mitchinson.net">Denise Mitchinson</a></div>
  </div>
@@ -133,4 +138,4 @@ $:page
 <script type="text/javascript">try{ clicky.init(66579716); }catch(e){}</script>
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66579716ns.gif" /></p></noscript>
  </body>
-</head>
+</html>

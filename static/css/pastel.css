@@ -41,6 +41,7 @@ background : #d9e1e5; /* url(img/blue_banner2.jpg) no-repeat top center; */
 }
 #content {
 overflow: hidden;
+min-width: 570px;
 padding : 10px;
 margin-left : 155px;
 margin-right : 155px;
