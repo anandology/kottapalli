@@ -19,13 +19,13 @@ $if issue:
         <div id="cover-thumb">
             <a href="$issue.key" title="$issue.name సంచిక"><img src="$cover_url" alt="$issue.name సంచిక"/></a>
         </div>
-	$if current:
-	    $ categories = categorize_articles(issue.articles)
-	    $for cat, articles in categories.items():
-	        <h1>$cat</h1>
-	        <div class="menu">
-	        <ul>
-	        $for a in articles:
-	            <li><a href="$a.key">$a.title</a></li>
-	        </ul>
-	        </div>
+$if current:
+    $ categories = categorize_articles(issue.articles)
+    $for cat, articles in categories.items():
+        <h1>$cat</h1>
+        <div class="menu">
+        <ul>
+        $for a in articles:
+            <li><a href="$a.key">$a.title</a></li>
+        </ul>
+        </div>
